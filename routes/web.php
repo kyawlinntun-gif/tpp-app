@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SutdentController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,4 +65,7 @@ Route::get('/', function(){
 });
 
 Route::get('/students', [SutdentController::class, 'index']);
+
+// Articles
+Route::get('/articles', [ArticleController::class, 'index']);
 
