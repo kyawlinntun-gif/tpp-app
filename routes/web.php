@@ -73,6 +73,6 @@ Route::get('/categories/create', [CategoryController::class, 'create'])->name('c
 Route::get('/categories/edit', [CategoryController::class, 'edit'])->name('category.edit');
 
 // Products
-Route::get('/products', [ProductController::class, 'index'])->name('product.index');
-Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
-Route::get('/products/edit', [ProductController::class, 'edit'])->name('product.edit');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::get('/products/edit', [ProductController::class, 'edit'])->name('products.edit');

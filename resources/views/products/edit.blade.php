@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h1>Product Update</h1>
-                        <a href="{{ route('product.index') }}" class="btn btn-outline-success">Back</a>
+                        <a href="{{ route('products.index') }}" class="btn btn-outline-success">Back</a>
                     </div>
                     <div class="card-body">
                         <form action="#" method="post">

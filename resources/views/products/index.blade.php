@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h1>Products List</h1>
-                        <a href="{{ route('product.create') }}" class="btn btn-outline-success">Create</a>
+                        <a href="{{ route('products.create') }}" class="btn btn-outline-success">Create</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-dark text-center">
@@ -34,7 +34,7 @@
                                         <td>{{ $product['name'] }}</td>
                                         <td>{{ $product['description'] }}</td>
                                         <td>{{ $product['price'] }}</td>
-                                        <td><a href="{{ route('product.edit') }}" class="btn btn-outline-warning">Edit</a></td>
+                                        <td><a href="{{ route('products.edit') }}" class="btn btn-outline-warning">Edit</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
