@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Database\Seeders\CategorySeeder;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -29,7 +30,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -43,24 +48,33 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        return view('categories.edit');
+        $category = Category::where('id', $id)->first();
+        return view('categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::where('id', $id)->first();
+        $category->update([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::where('id', $id)->first();
+        $category->delete();
+        
+        return redirect()->route('categories.index');
     }
 }
