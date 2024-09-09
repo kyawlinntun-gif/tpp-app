@@ -17,7 +17,7 @@
                         <a href="{{ route('products.index') }}" class="btn btn-outline-success">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="#" method="post">
+                        <form action="{{ route('products.store') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name:</label>
@@ -30,6 +30,13 @@
                             <div class="form-group mt-2">
                                 <label for="price">Price:</label>
                                 <input type="number" name="price" id="price" class="form-control">
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">Create</button>
                         </form>

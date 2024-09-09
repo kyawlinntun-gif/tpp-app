@@ -19,18 +19,24 @@
                     <div class="card-body">
                         <form action="#" method="post">
                             @csrf
-                            @method('patch')
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" name="name" id="name" class="form-control">
+                                <input type="text" name="name" id="name" class="form-control" value="{{ $product['name'] }}">
                             </div>
                             <div class="form-group mt-2">
                                 <label for="description">Description:</label>
-                                <textarea name="description" id="description" rows="5" class="form-control"></textarea>
+                                <textarea name="description" id="description" rows="5" class="form-control">{{ $product['description'] }}</textarea>
                             </div>
                             <div class="form-group mt-2">
                                 <label for="price">Price:</label>
-                                <input type="number" name="price" id="price" class="form-control">
+                                <input type="number" name="price" id="price" class="form-control" value="{{ $product['price'] }}">
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1" {{ $product['status'] ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ $product['status'] ? '' : 'selected' }}>Inactive</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">Update</button>
                         </form>
