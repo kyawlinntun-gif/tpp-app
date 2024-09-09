@@ -17,7 +17,7 @@
                         <a href="{{ route('products.index') }}" class="btn btn-outline-success">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="#" method="post">
+                        <form action="{{ route('products.update', $product['id']) }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name:</label>
