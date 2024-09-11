@@ -22,14 +22,23 @@
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" name="name" id="name" class="form-control">
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group mt-2">
                                 <label for="description">Description:</label>
                                 <textarea name="description" id="description" rows="5" class="form-control"></textarea>
+                                @error('description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group mt-2">
                                 <label for="price">Price:</label>
                                 <input type="number" name="price" id="price" class="form-control">
+                                @error('price')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group mt-2">
                                 <label for="status">Status</label>
