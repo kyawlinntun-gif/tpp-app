@@ -26,7 +26,7 @@ class ProductCreateRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required|integer',
             'status' => 'required|boolean',
-            'image' => 'nullable'
+            'image' => 'nullable|image|mimes:png,jpg'
         ];
     }
 }
