@@ -68,9 +68,15 @@ Route::get('/', function(){
 Route::get('/students', [SutdentController::class, 'index']);
 
 // Categories
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/create', [CategoryController::class, 'create'])->name('category.create');
-Route::get('/categories/edit', [CategoryController::class, 'edit'])->name('category.edit');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/categories/store', [CategoryController::class, 'store'])->name('categoreis.store');
+
+Route::get('/categories/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');
+
+Route::post('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 // Products
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -82,6 +88,7 @@ Route::get('/products/{id}', [ProductController::class, 'edit'])->name('products
 Route::post('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

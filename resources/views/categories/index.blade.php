@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h1 class="mb-4">Categories List</h1>
-                <a href="{{ route('category.create') }}" class="btn btn-outline-success">Create</a>
+                <a href="{{ route('categories.create') }}" class="btn btn-outline-success mb-2">Create</a>
                 <table class="table table-border">
                     <thead>
                         <tr>
@@ -26,7 +26,13 @@
                             <tr>
                                 <td>{{ $category['id'] }}</td>
                                 <td>{{ $category['name'] }}</td>
-                                <td><a href="{{ route('category.edit') }}" class="btn btn-outline-warning">Edit</a></td>
+                                <td class="d-flex gap-2">
+                                    <a href="{{ route('categories.edit', ['id' => $category['id']]) }}" class="btn btn-outline-warning">Edit</a>
+                                    <form action="{{ route('categories.destroy', $category['id']) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
