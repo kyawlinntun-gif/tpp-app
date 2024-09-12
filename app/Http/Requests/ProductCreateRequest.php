@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class ProductCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,12 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('id');
-
         return [
-            'name' => 'required|string|min:2|unique:products,name,' . $id,
+            'name' => 'required|string|min:2|unique:products,name',
             'description' => 'required|string',
             'price' => 'required|integer',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
+            'image' => 'nullable'
         ];
     }
 }
