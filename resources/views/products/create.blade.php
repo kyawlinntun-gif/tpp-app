@@ -17,7 +17,7 @@
                         <a href="{{ route('products.index') }}" class="btn btn-outline-success">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('products.store') }}" method="post">
+                        <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name:</label>
@@ -39,6 +39,10 @@
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="image">Image:</label>
+                                <input type="file" name="image" id="image" class="form-control">
                             </div>
                             <div class="form-group mt-2">
                                 <label for="status">Status</label>

@@ -25,6 +25,7 @@
                                     <th class="bg-primary text-white" scope="col">DESCRIPTION</th>
                                     <th class="bg-primary text-white" scope="col">PRICE</th>
                                     <th class="bg-primary text-white" scope="col">STATUS</th>
+                                    <th class="bg-primary text-white" scope="col">IMAGE</th>
                                     <th class="bg-primary text-white" scope="col">ACTION</th>
                                 </tr>
                             </thead>
@@ -36,18 +37,23 @@
                                         <td>{{ $product['description'] }}</td>
                                         <td>{{ $product['price'] }}</td>
                                         <td>{{ $product['status'] ? 'Active' : 'Inactive' }}</td>
-                                        <td class="d-flex gap-2">
-                                            <a href="{{ route('products.edit', $product['id']) }}" class="btn btn-outline-warning">Edit</a>
-                                            <button class="btn btn-outline-danger" 
-                                            onclick="
-                                            event.preventDefault();
-                                            confirmDeleteProduct({{ $product['id'] }});
-                                            "
-                                            >Delete</button>
-                                            <form action="{{ route('products.destroy', $product['id']) }}" method="post" id="deleteProduct{{ $product['id'] }}" hidden>
-                                                @csrf
-                                                @method('delete')
-                                            </form>
+                                        <td>
+                                            <img src="{{ asset('productImages/' . $product['image']) }}" alt="{{ $product['image'] }}" style="width: 70px; height: 70px;">
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="{{ route('products.edit', $product['id']) }}" class="btn btn-outline-warning">Edit</a>
+                                                <button class="btn btn-outline-danger" 
+                                                onclick="
+                                                event.preventDefault();
+                                                confirmDeleteProduct({{ $product['id'] }});
+                                                "
+                                                >Delete</button>
+                                                <form action="{{ route('products.destroy', $product['id']) }}" method="post" id="deleteProduct{{ $product['id'] }}" hidden>
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

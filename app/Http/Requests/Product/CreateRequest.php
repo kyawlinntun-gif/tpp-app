@@ -25,7 +25,8 @@ class CreateRequest extends FormRequest
             'name' => 'required|string|min:2|unique:products,name',
             'description' => 'required|string',
             'price' => 'required|integer',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
+            'image' => 'nullable'
         ];
     }
 }

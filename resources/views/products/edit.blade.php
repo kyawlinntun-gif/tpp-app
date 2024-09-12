@@ -17,7 +17,7 @@
                         <a href="{{ route('products.index') }}" class="btn btn-outline-success">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('products.update', $product['id']) }}" method="post">
+                        <form action="{{ route('products.update', $product['id']) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name:</label>
@@ -46,6 +46,10 @@
                                     <option value="1" {{ $product['status'] ? 'selected' : '' }}>Active</option>
                                     <option value="0" {{ $product['status'] ? '' : 'selected' }}>Inactive</option>
                                 </select>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="image">Image: </label>
+                                <img src="{{ asset('productImages/' . $product['image']) }}" alt="{{ $product['image'] }}" style="width: 100px; height: 100px; display: block;">
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">Update</button>
                         </form>
