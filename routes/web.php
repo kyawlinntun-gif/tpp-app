@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SutdentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +77,18 @@ Route::get('/categories/{id}', [CategoryController::class, 'edit'])->name('categ
 Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');
 
 Route::post('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+// Products
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+Route::get('/products/{id}', [ProductController::class, 'edit'])->name('products.edit');
+Route::post('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
