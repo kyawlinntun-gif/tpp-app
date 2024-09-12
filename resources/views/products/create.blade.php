@@ -43,6 +43,9 @@
                             <div class="form-group mt-2">
                                 <label for="image">Image:</label>
                                 <input type="file" name="image" id="image" class="form-control">
+                                @error('image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group mt-2">
                                 <label for="status">Status</label>

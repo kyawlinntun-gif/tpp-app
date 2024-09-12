@@ -6,6 +6,7 @@ use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -37,7 +38,9 @@ class ProductController extends Controller
         {
             $imageName = time() . '.' . $request->image->extension();
 
-            $request->image->move(public_path('productImages'), $imageName);
+            // $request->image->move(public_path('productImages'), $imageName);
+
+            $request->image->storeAs('productImages', $imageName);
 
             $product = array_merge($product, ['image' => $imageName]);
         }
