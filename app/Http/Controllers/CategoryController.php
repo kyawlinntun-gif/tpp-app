@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Models\Category;
 use Database\Seeders\CategorySeeder;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function __construct()
+    private CategoryRepositoryInterface $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         $this->middleware('auth');
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -18,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->categoryRepository->index();
         return view('categories.index', compact('categories'));
     }
 
@@ -55,7 +59,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::where('id', $id)->first();
+        $category = $this->categoryRepository->show($id);
         return view('categories.edit', compact('category'));
     }
 
@@ -64,7 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::where('id', $id)->first();
+        $category = $this->categoryRepository->show($id);
         $category->update([
             'name' => $request->name
         ]);
@@ -77,7 +81,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::where('id', $id)->first();
+        $category = $this->categoryRepository->show($id);
         $category->delete();
         
         return redirect()->route('categories.index');
