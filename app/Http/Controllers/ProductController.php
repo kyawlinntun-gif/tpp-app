@@ -5,17 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
+use App\Repositories\Product\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    private ProductRepositoryInterface $productRepository;
+    public function __construct(ProductRepositoryInterface $productRepository)
+    {
+        $this->middleware('auth');
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::all();
+        $products = $this->productRepository->index();
         return view('products.index', compact('products'));
     }
 
@@ -63,7 +71,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->productRepository->show($id);
+
         return view('products.edit', [
             'product' => $product
         ]);
@@ -74,7 +83,8 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, $id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->productRepository->show($id);
+
         $product->update($request->validated());
 
         return redirect()->route('products.index');
@@ -85,7 +95,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->productRepository->show($id);
+
         $product->delete();
 
         return redirect()->route('products.index');

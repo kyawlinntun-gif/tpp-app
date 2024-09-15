@@ -17,9 +17,9 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 // Static Route
@@ -62,9 +62,9 @@ Route::prefix('dashboard')->group(function(){
 
 // Laravel View
 
-Route::get('/', function(){
-    return view('index');
-});
+// Route::get('/', function(){
+//     return view('index');
+// });
 
 Route::get('/students', [SutdentController::class, 'index']);
 
@@ -90,6 +90,6 @@ Route::post('/products/{id}', [ProductController::class, 'update'])->name('produ
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
