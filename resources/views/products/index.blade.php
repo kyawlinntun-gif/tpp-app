@@ -23,34 +23,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $product)
-                            <tr>
-                                <td>{{ $product['id'] }}</td>
-                                <td>{{ $product['name'] }}</td>
-                                <td>{{ $product['description'] }}</td>
-                                <td>{{ $product['price'] }}</td>
-                                <td>{{ $product['status'] ? 'Active' : 'Inactive' }}</td>
-                                <td>
-                                    <img src="{{ asset('productImages/' . $product['image']) }}" alt="{{ $product['image'] }}" style="width: 70px; height: 70px;">
-                                </td>
-                                <td>{{ $product['category']['name'] }}</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="{{ route('products.edit', $product['id']) }}" class="btn btn-outline-warning mr-2">Edit</a>
-                                        <button class="btn btn-outline-danger" 
-                                        onclick="
-                                        event.preventDefault();
-                                        confirmDeleteProduct({{ $product['id'] }});
-                                        "
-                                        >Delete</button>
-                                        <form action="{{ route('products.destroy', $product['id']) }}" method="post" id="deleteProduct{{ $product['id'] }}" hidden>
-                                            @csrf
-                                            @method('delete')
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                        @if (count($products) > 0)
+                            @foreach ($products as $product)
+                                <tr>
+                                    <td>{{ $product['id'] }}</td>
+                                    <td>{{ $product['name'] }}</td>
+                                    <td>{{ $product['description'] }}</td>
+                                    <td>{{ $product['price'] }}</td>
+                                    <td>{{ $product['status'] ? 'Active' : 'Inactive' }}</td>
+                                    <td>
+                                        <img src="{{ asset('productImages/' . $product['image']) }}" alt="{{ $product['image'] }}" style="width: 70px; height: 70px;">
+                                    </td>
+                                    <td>{{ $product['category']['name'] ?? 'Undefined' }}</td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="{{ route('products.edit', $product['id']) }}" class="btn btn-outline-warning mr-2">Edit</a>
+                                            <button class="btn btn-outline-danger" 
+                                            onclick="
+                                            event.preventDefault();
+                                            confirmDeleteProduct({{ $product['id'] }});
+                                            "
+                                            >Delete</button>
+                                            <form action="{{ route('products.destroy', $product['id']) }}" method="post" id="deleteProduct{{ $product['id'] }}" hidden>
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

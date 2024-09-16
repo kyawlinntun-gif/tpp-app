@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function categoryAttachments():HasMany
+    {
+        return $this->hasMany(CategoryAttachment::class);
+    }
 }

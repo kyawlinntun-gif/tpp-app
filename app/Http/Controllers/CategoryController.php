@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryCreateRequest;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Models\Category;
 use Database\Seeders\CategorySeeder;
@@ -37,11 +38,23 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
-        Category::create([
+        $category = Category::create([
             'name' => $request->name
         ]);
+
+        if($request->hasFile('images')) {
+            foreach($request->file('images') as $image) {
+                $imageName = time() . '_' . uniqid() . '.' . $image->extension();
+
+                $image->storeAs('categoryImages', $imageName);
+
+                $category->categoryAttachments()->create([
+                    'image' => $imageName
+                ]);
+            }
+        }
 
         return redirect()->route('categories.index');
     }

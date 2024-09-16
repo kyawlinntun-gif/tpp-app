@@ -74,9 +74,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productRepository->show($id);
+        $categories = Category::all();
 
         return view('products.edit', [
-            'product' => $product
+            'product' => $product,
+            'categories' => $categories
         ]);
     }
 

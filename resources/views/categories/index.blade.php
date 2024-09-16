@@ -14,6 +14,7 @@
                         <tr>
                             <th class="bg-primary text-white" scope="col">#ID</th>
                             <th class="bg-primary text-white" scope="col">NAME</th>
+                            <th class="bg-primary text-white" scope="col">Image</th>
                             <th class="bg-primary text-white" scope="col">ACTION</th>
                         </tr>
                     </thead>
@@ -22,6 +23,13 @@
                         <tr>
                             <td>{{ $category['id'] }}</td>
                             <td>{{ $category['name'] }}</td>
+                            <td>
+                                @if(count($category['categoryAttachments']) > 0)
+                                    @foreach ($category['categoryAttachments'] as $image)
+                                        <img src="{{ asset('categoryImages/' . $image['image']) }}" alt="{{ $image['image'] }}" style="width: 70px; height: 70px;">
+                                    @endforeach
+                                @endif
+                            </td>
                             <td class="d-flex gap-2">
                                 <a href="{{ route('categories.edit', ['id' => $category['id']]) }}"
                                     class="btn btn-outline-warning mr-2">Edit</a>
