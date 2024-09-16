@@ -8,7 +8,7 @@ use App\Repositories\Product\ProductRepositoryInterface;
 class ProductRepository implements ProductRepositoryInterface {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get();
         return $products;
     }
 

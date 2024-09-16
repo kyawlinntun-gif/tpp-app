@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboards', function() {
+    return view('index');
+})->name('dashboards');
+
 
 // Static Route
 
