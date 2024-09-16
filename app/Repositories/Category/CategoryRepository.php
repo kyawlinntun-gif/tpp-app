@@ -8,7 +8,7 @@ use App\Repositories\Category\CategoryRepositoryInterface;
 class CategoryRepository implements CategoryRepositoryInterface {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::with('categoryAttachments')->get();
         return $categories;
     }
 

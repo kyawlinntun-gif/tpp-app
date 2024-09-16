@@ -33,6 +33,10 @@
                         @enderror
                     </div>
                     <div class="form-group mt-2">
+                        <label for="image">Image: </label>
+                        <img src="{{ asset('productImages/' . $product['image']) }}" alt="{{ $product['image'] }}" style="width: 100px; height: 100px; display: block;">
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control">
                             <option value="1" {{ $product['status'] ? 'selected' : '' }}>Active</option>
@@ -40,8 +44,12 @@
                         </select>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="image">Image: </label>
-                        <img src="{{ asset('productImages/' . $product['image']) }}" alt="{{ $product['image'] }}" style="width: 100px; height: 100px; display: block;">
+                        <label for="category">Category:</label>
+                        <select name="category_id" id="category_id" class="form-control">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ $product['category']['id'] === $category['id'] ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>

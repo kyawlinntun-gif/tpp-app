@@ -14,6 +14,9 @@
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter your category" value="{{ $category['name'] }}">
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
