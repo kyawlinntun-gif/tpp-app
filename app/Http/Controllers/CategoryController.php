@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryCreateRequest;
 use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Models\Category;
-use Database\Seeders\CategorySeeder;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -60,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show()
     {
         //
     }
