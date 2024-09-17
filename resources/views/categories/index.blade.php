@@ -6,7 +6,9 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h1>Categories List</h1>
-                <a href="{{ route('categories.create') }}" class="btn btn-outline-success">Create</a>
+                @can('categoryCreate')
+                    <a href="{{ route('categories.create') }}" class="btn btn-outline-success">Create</a>
+                @endcan
             </div>
             <div class="card-body">
                 <table class="table table-border">
@@ -31,12 +33,16 @@
                                 @endif
                             </td>
                             <td class="d-flex gap-2">
-                                <a href="{{ route('categories.edit', ['id' => $category['id']]) }}"
-                                    class="btn btn-outline-warning mr-2">Edit</a>
-                                <form action="{{ route('categories.destroy', $category['id']) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                @can('categoryEdit')    
+                                    <a href="{{ route('categories.edit', ['id' => $category['id']]) }}"
+                                        class="btn btn-outline-warning mr-2">Edit</a>
+                                @endcan
+                                @can('categoryDelete')    
+                                    <form action="{{ route('categories.destroy', $category['id']) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

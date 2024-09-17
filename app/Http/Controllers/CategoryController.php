@@ -40,9 +40,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryCreateRequest $request)
     {
-        $category = Category::create([
-            'name' => $request->name
-        ]);
+        $category = $this->categoryRepository->store($request->name);
 
         if($request->hasFile('images')) {
             foreach($request->file('images') as $image) {
@@ -81,11 +79,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = $this->categoryRepository->show($id);
-        $category->update([
-            'name' => $request->name
-        ]);
-
+        $this->categoryRepository->update($id, $request->name);
         return redirect()->route('categories.index');
     }
 
@@ -94,8 +88,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = $this->categoryRepository->show($id);
-        $category->delete();
+        $this->categoryRepository->destroy($id);
         
         return redirect()->route('categories.index');
     }

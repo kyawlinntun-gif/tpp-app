@@ -23,8 +23,7 @@
     </div>
     <div class="app-header__menu">
         <span>
-            <button type="button"
-                class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+            <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
                 <span class="btn-icon-wrapper">
                     <i class="fa fa-ellipsis-v fa-w-6"></i>
                 </span>
@@ -34,6 +33,7 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
+                @can('dashboard')
                 <li class="app-sidebar__heading">Dashboards</li>
                 <li>
                     <a href="{{ route('dashboards') }}" class="mm-active">
@@ -41,7 +41,8 @@
                         TPP Dashboard
                     </a>
                 </li>
-                <li class="app-sidebar__heading">UI Components</li>
+                @endcan
+                @can('categoryList')    
                 <li>
                     <a href="{{ route('categories.index') }}">
                         <i class="metismenu-icon pe-7s-diamond"></i>
@@ -49,6 +50,8 @@
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                 </li>
+                @endcan
+                @can('productList')
                 <li>
                     <a href="{{ route('products.index') }}">
                         <i class="metismenu-icon pe-7s-diamond"></i>
@@ -56,6 +59,16 @@
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                 </li>
+                @endcan
+                @can('userList')    
+                <li>
+                    <a href="#">
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        User
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                </li>
+                @endcan
             </ul>
         </div>
     </div>

@@ -94,6 +94,9 @@ Route::post('/products/{id}', [ProductController::class, 'update'])->name('produ
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+// Users
+// Route::get('/users', )
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

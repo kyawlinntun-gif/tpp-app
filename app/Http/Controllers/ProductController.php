@@ -6,6 +6,7 @@ use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,13 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     private ProductRepositoryInterface $productRepository;
-    public function __construct(ProductRepositoryInterface $productRepository)
+    private CategoryRepositoryInterface $categoryRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository)
     {
         $this->middleware('auth');
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -33,7 +37,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = $this->categoryRepository->index();
         return view('products.create', compact('categories'));
     }
 
@@ -55,7 +59,7 @@ class ProductController extends Controller
             $product = array_merge($product, ['image' => $imageName]);
         }
 
-        Product::create($product);
+        $this->productRepository->store($product);
 
         return redirect()->route('products.index');
     }
@@ -74,7 +78,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productRepository->show($id);
-        $categories = Category::all();
+        $categories = $this->categoryRepository->index();
 
         return view('products.edit', [
             'product' => $product,
@@ -87,9 +91,7 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, $id)
     {
-        $product = $this->productRepository->show($id);
-
-        $product->update($request->validated());
+        $this->productRepository->update($id, $request->validated());
 
         return redirect()->route('products.index');
     }
@@ -99,9 +101,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = $this->productRepository->show($id);
-
-        $product->delete();
+        $this->productRepository->destroy($id);
 
         return redirect()->route('products.index');
     }

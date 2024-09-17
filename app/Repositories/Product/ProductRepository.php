@@ -17,4 +17,21 @@ class ProductRepository implements ProductRepositoryInterface {
         $product = Product::findOrFail($id);
         return $product;
     }
+
+    public function store($product)
+    {
+        Product::create($product);
+    }
+
+    public function update($id, $data)
+    {
+        $product = $this->show($id);
+        $product->update($data);
+    }
+
+    public function destroy($id)
+    {
+        $product = $this->show($id);
+        $product->delete(); 
+    }
 }

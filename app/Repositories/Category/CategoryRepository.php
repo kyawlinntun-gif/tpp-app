@@ -17,4 +17,27 @@ class CategoryRepository implements CategoryRepositoryInterface {
         $category = Category::where('id', $id)->first();
         return $category;
     }
+
+    public function store($name)
+    {
+        $category = Category::create([
+            'name' => $name
+        ]);
+
+        return $category;
+    }
+
+    public function update($id, $name)
+    {
+        $category = $this->show($id);
+        $category->update([
+            'name' => $name
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $category = $this->show($id);
+        $category->delete();
+    }
 }
