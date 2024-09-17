@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SutdentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +96,15 @@ Route::post('/products/{id}', [ProductController::class, 'update'])->name('produ
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 // Users
-// Route::get('/users', )
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
+Route::get('/users/{id}', [UserController::class, 'edit'])->where(['id' => '[0-9]+'])->name('users.edit');
+Route::match(['put', 'patch'], '/users/{id}', [UserController::class, 'update'])->where(['id', '[0-9]+'])->name('users.update');
+
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->where(['id', '[0-9]+'])->name('users.destroy');
 
 Auth::routes(['register' => false]);
 

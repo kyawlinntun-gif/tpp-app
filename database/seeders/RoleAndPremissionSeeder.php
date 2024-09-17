@@ -29,6 +29,9 @@ class RoleAndPremissionSeeder extends Seeder
         $categoryDelete = Permission::create(['name' => 'categoryDelete']);
 
         $userList = Permission::create(['name' => 'userList']);
+        $userCreate = Permission::create(['name' => 'userCreate']);
+        $userEdit = Permission::create(['name' => 'userEdit']);
+        $userDelete = Permission::create(['name' => 'userDelete']);
 
         $admin->givePermissionTo([
             $dashboard,
@@ -40,7 +43,10 @@ class RoleAndPremissionSeeder extends Seeder
             $categoryCreate,
             $categoryEdit,
             $categoryDelete,
-            $userList
+            $userList,
+            $userCreate,
+            $userEdit,
+            $userDelete
         ]);
 
         $user->givePermissionTo([
