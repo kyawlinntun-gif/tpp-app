@@ -78,6 +78,15 @@
                     </a>
                 </li>
                 @endcan
+                @can('permissionList')    
+                <li>
+                    <a href="{{ route('permissions.index') }}">
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        Permission
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                </li>
+                @endcan
             </ul>
         </div>
     </div>

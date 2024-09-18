@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SutdentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
@@ -105,13 +106,29 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}', [UserController::class, 'edit'])->where(['id' => '[0-9]+'])->name('users.edit');
 Route::match(['put', 'patch'], '/users/{id}', [UserController::class, 'update'])->where(['id', '[0-9]+'])->name('users.update');
 
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->where(['id', '[0-9]+'])->name('users.destroy');
+
 // Roles
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
 Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
 Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
 
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->where(['id', '[0-9]+'])->name('users.destroy');
+Route::get('/roles/{id}', [RoleController::class, 'edit'])->where(['id' => '[0-9]+'])->name('roles.edit');
+Route::match(['put', 'patch'], '/roles/{id}', [RoleController::class, 'update'])->where(['id' => '[0-9]+'])->name('roles.update');
+
+Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('roles.destroy');
+
+// Permissions
+Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+
+Route::get('/permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
+Route::post('/permissions', [PermissionController::class, 'store'])->name('permissions.store');
+
+Route::get('/permissions/{id}', [PermissionController::class, 'edit'])->where(['id' => '[0-9]+'])->name('permissions.edit');
+Route::match(['put', 'patch'], '/permissions/{id}', [PermissionController::class, 'update'])->where(['id' => '[0-9]+'])->name('permissions.update');
+
+Route::delete('/permissions/{id}', [PermissionController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('permissions.destroy');
 
 Auth::routes(['register' => false]);
 

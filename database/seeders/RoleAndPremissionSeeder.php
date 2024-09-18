@@ -35,6 +35,13 @@ class RoleAndPremissionSeeder extends Seeder
 
         $roleList = Permission::create(['name' => 'roleList']);
         $roleCreate = Permission::create(['name' => 'roleCreate']);
+        $roleEdit = Permission::create(['name' => 'roleEdit']);
+        $roleDelete = Permission::create(['name' => 'roleDelete']);
+
+        $permissionList = Permission::create(['name' => 'permissionList']);
+        $permissionCreate = Permission::create(['name' => 'permissionCreate']);
+        $permissionEdit = Permission::create(['name' => 'permissionEdit']);
+        $permissionDelete = Permission::create(['name' => 'permissionDelete']);
 
         $admin->givePermissionTo([
             $dashboard,
@@ -51,7 +58,13 @@ class RoleAndPremissionSeeder extends Seeder
             $userEdit,
             $userDelete,
             $roleList,
-            $roleCreate
+            $roleCreate,
+            $roleEdit,
+            $roleDelete,
+            $permissionList,
+            $permissionCreate,
+            $permissionEdit,
+            $permissionDelete
         ]);
 
         $user->givePermissionTo([
@@ -59,7 +72,8 @@ class RoleAndPremissionSeeder extends Seeder
             $productList,
             $categoryList,
             $userList,
-            $roleList
+            $roleList,
+            $permissionList
         ]);
     }
 }

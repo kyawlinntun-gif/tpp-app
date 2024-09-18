@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories\Role;
+namespace App\Repositories\Permission;
 
-interface RoleRepositoryInterface {
+interface PermissionRepositoryInterface {
     public function index();
-    public function store($role);
+    public function store($data);
     public function edit($id);
     public function update($id, $data);
     public function destroy($id);
