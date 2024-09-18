@@ -26,6 +26,15 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="form-group mt-2">
+                        <label for="role_id">Role</label>
+                        <select name="role_id" id="role_id" class="form-control">
+                            <option>Choose Role</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}" {{ $role->id === $user->roles->pluck('id')->first() ? 'selected' : '' }}>{{ ucfirst($role->name) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
             </div>

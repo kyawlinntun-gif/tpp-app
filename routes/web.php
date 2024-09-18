@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SutdentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -103,6 +104,12 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 Route::get('/users/{id}', [UserController::class, 'edit'])->where(['id' => '[0-9]+'])->name('users.edit');
 Route::match(['put', 'patch'], '/users/{id}', [UserController::class, 'update'])->where(['id', '[0-9]+'])->name('users.update');
+
+// Roles
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+
+Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
 
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->where(['id', '[0-9]+'])->name('users.destroy');
 

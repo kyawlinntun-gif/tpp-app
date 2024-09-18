@@ -36,6 +36,14 @@
                         <label for="password_confirmation">Confirm password:</label>
                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                     </div>
+                    <div class="form-group mt-2">
+                        <label for="role_id">Role:</label>
+                        <select name="role_id" id="role_id" class="form-control">
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary mt-2">Create</button>
                 </form>
             </div>

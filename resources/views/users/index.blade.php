@@ -17,6 +17,7 @@
                             <th class="bg-primary text-white" scope="col">#ID</th>
                             <th class="bg-primary text-white" scope="col">NAME</th>
                             <th class="bg-primary text-white" scope="col">EMAIL</th>
+                            <th class="bg-primary text-white" scope="col">Role</th>
                             <th class="bg-primary text-white" scope="col">ACTION</th>
                         </tr>
                     </thead>
@@ -27,6 +28,7 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ ucfirst($user->roles->pluck('name')->first()) }}</td>
                                     <td>
                                         @can('userEdit')
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning">Edit</a>

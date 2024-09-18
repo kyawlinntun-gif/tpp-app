@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -25,7 +26,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+        return view('users.create', compact('roles'));
     }
 
     public function store(UserCreateRequest $request)
@@ -37,8 +39,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userRepository->show($id);
+        $roles = Role::all();
         return view('users.edit', [
-            'user' => $user
+            'user' => $user,
+            'roles' => $roles
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Repositories\User;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use App\Repositories\User\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface {
@@ -14,7 +15,9 @@ class UserRepository implements UserRepositoryInterface {
 
     public function store($user)
     {
-        User::create($user);
+        $role = Role::findOrFail($user['role_id']);
+        $user = User::create($user);
+        $user->assignRole($role->name);
     }
 
     public function show($id)
@@ -26,7 +29,9 @@ class UserRepository implements UserRepositoryInterface {
     public function update($id, $data)
     {
         $user = $this->show($id);
+        $role = Role::findOrFail($data['role_id']);
         $user->update($data);
+        $user->syncRoles($role);
     }
 
     public function destroy($id)

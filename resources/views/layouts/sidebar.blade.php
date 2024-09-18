@@ -69,6 +69,15 @@
                     </a>
                 </li>
                 @endcan
+                @can('roleList')
+                <li>
+                    <a href="{{ route('roles.index') }}">
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        Role
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                </li>
+                @endcan
             </ul>
         </div>
     </div>
