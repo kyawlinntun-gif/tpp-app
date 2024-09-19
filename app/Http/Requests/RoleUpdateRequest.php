@@ -24,7 +24,9 @@ class RoleUpdateRequest extends FormRequest
         $id = $this->route('id');
 
         return [
-            'name' => 'required|string|min:3|unique:roles,name,' . $id
+            'name' => 'required|string|min:3|unique:roles,name,' . $id,
+            'permission_id' => 'required|array',
+            'permission_id.*' => 'required|integer|exists:permissions,id'
         ];
     }
 }

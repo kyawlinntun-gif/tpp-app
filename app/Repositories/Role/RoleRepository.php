@@ -4,6 +4,7 @@ namespace App\Repositories\Role;
 
 use Spatie\Permission\Models\Role;
 use App\Repositories\Role\RoleRepositoryInterface;
+use Spatie\Permission\Models\Permission;
 
 class RoleRepository implements RoleRepositoryInterface {
     public function index()
@@ -12,9 +13,10 @@ class RoleRepository implements RoleRepositoryInterface {
         return $roles;
     }
 
-    public function store($role)
+    public function store($data)
     {
-        Role::create($role);
+        $role = Role::create($data);
+        $role->permissions()->sync($data['permission_id']);
     }
 
     public function edit($id)
@@ -27,11 +29,13 @@ class RoleRepository implements RoleRepositoryInterface {
     {
         $role = Role::findOrFail($id);
         $role->update($data);
+        $role->permissions()->sync($data['permission_id']);
     }
 
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
+        $role->permissions()->detach();
         $role->delete();
     }
 }

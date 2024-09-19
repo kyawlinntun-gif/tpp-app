@@ -16,6 +16,7 @@
                         <tr>
                             <th class="bg-primary text-white" scope="col">#ID</th>
                             <th class="bg-primary text-white" scope="col">NAME</th>
+                            <th class="bg-primary text-white" scope="col">PERMISSION</th>
                             <th class="bg-primary text-white" scope="col">ACTION</th>
                         </tr>
                     </thead>
@@ -25,6 +26,11 @@
                                 <tr>
                                     <td>{{ ucfirst($role->id) }}</td>
                                     <td>{{ ucfirst($role->name) }}</td>
+                                    <td>
+                                        @foreach ($role->permissions as $permission)
+                                            {{ $permission->name }}@if(!$loop->last){{ ', ' }}@endif
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             @can('roleEdit')

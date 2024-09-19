@@ -19,6 +19,23 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="form-group mt-2">
+                        <label for="role_id">Role</label>
+                        <div>
+                            @foreach ($permissions as $permission)
+                                <input type="checkbox" name="permission_id[]" id="permission_id" class="mr-2" value="{{ $permission->id }}"
+                                @foreach ($role->permissions as $rolePermission)
+                                    @if ($rolePermission->id === $permission->id)
+                                        {{ 'checked' }}
+                                    @endif
+                                @endforeach
+                                >{{ ucfirst($permission->name) }} <br/>
+                            @endforeach
+                        </div>
+                        @error('permission_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                     <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
             </div>

@@ -22,7 +22,9 @@ class RoleCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|unique:roles,name'
+            'name' => 'required|string|min:3|unique:roles,name',
+            'permission_id' => 'required|array',
+            'permission_id.*' => 'required|integer|exists:permissions,id'
         ];
     }
 }

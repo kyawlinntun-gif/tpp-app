@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleCreateRequest;
 use App\Http\Requests\RoleUpdateRequest;
+use App\Repositories\Permission\PermissionRepositoryInterface;
 use App\Repositories\Role\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
     private RoleRepositoryInterface $roleRepository;
+    private PermissionRepositoryInterface $permissionRepository;
 
-    public function __construct(RoleRepositoryInterface $roleRepository)
+    public function __construct(RoleRepositoryInterface $roleRepository, PermissionRepositoryInterface $permissionRepository)
     {
         $this->roleRepository = $roleRepository;
+        $this->permissionRepository = $permissionRepository;
     }
 
     public function index()
@@ -24,7 +27,8 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('roles.create');
+        $permissions = $this->permissionRepository->index();
+        return view('roles.create', compact('permissions'));
     }
 
     public function store(RoleCreateRequest $request)
@@ -37,7 +41,8 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->roleRepository->edit($id);
-        return view('roles.edit', compact('role'));
+        $permissions = $this->permissionRepository->index();
+        return view('roles.edit', compact(['role', 'permissions']));
     }
 
     public function update($id, RoleUpdateRequest $request)
