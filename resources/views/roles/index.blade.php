@@ -28,7 +28,7 @@
                                     <td>{{ ucfirst($role->name) }}</td>
                                     <td>
                                         @foreach ($role->permissions as $permission)
-                                            {{ $permission->name }}@if(!$loop->last){{ ', ' }}@endif
+                                            {{ ucfirst($permission->name) }}@if(!$loop->last){{ ', ' }}@endif
                                         @endforeach
                                     </td>
                                     <td>
