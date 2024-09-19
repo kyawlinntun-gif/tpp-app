@@ -44,6 +44,18 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group mt-2">
+                        @foreach ($roles as $role)
+                        <div class="form-group mb-2">
+                            <h4>{{ ucfirst($role->name) }}:</h4>
+                            <p>
+                            @foreach($role->permissions as $permission)
+                                {{ ucfirst($permission->name) }}@if(!$loop->last){{ ', ' }}@endif
+                            @endforeach
+                            </p>
+                        </div>
+                        @endforeach
+                    </div>
                     <button type="submit" class="btn btn-primary mt-2">Create</button>
                 </form>
             </div>
