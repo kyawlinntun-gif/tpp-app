@@ -17,7 +17,9 @@
                             <th class="bg-primary text-white" scope="col">#ID</th>
                             <th class="bg-primary text-white" scope="col">NAME</th>
                             <th class="bg-primary text-white" scope="col">EMAIL</th>
-                            <th class="bg-primary text-white" scope="col">Role</th>
+                            <th class="bg-primary text-white" scope="col">ROLE</th>
+                            <th class="bg-primary text-white" scope="col">IMAGE</th>
+                            <th class="bg-primary text-white" scope="col">STATUS</th>
                             <th class="bg-primary text-white" scope="col">ACTION</th>
                         </tr>
                     </thead>
@@ -29,6 +31,10 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ ucfirst($user->roles->pluck('name')->first()) }}</td>
+                                    <td>
+                                        <img src="{{ asset('userImages/' . $user->image) }}" alt="{{ ucfirst($user->name) }}" style="width: 70px; height: 70px;">
+                                    </td>
+                                    <td>{{ $user->status ? 'Active' : 'Inactive' }}</td>
                                     <td>
                                         @can('userEdit')
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning">Edit</a>

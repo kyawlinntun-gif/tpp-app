@@ -9,7 +9,7 @@
                 <a href="{{ route('users.index') }}" class="btn btn-outline-success">Back</a>
             </div>
             <div class="card-body">
-                <form action="{{ route('users.store') }}" method="post">
+                <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name:</label>
@@ -37,24 +37,23 @@
                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                     </div>
                     <div class="form-group mt-2">
+                        <label for="image">Image</label>
+                        <input type="file" name="image" id="image" class="form-control">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="status">Status:</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="role_id">Role:</label>
                         <select name="role_id" id="role_id" class="form-control">
                             @foreach ($roles as $role)
                                 <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="form-group mt-2">
-                        @foreach ($roles as $role)
-                        <div class="form-group mb-2">
-                            <h4>{{ ucfirst($role->name) }}:</h4>
-                            <p>
-                            @foreach($role->permissions as $permission)
-                                {{ ucfirst($permission->name) }}@if(!$loop->last){{ ', ' }}@endif
-                            @endforeach
-                            </p>
-                        </div>
-                        @endforeach
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Create</button>
                 </form>

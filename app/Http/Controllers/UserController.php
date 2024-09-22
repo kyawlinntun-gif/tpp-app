@@ -35,7 +35,15 @@ class UserController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        $this->userRepository->store($request->validated());
+        $user = $request->validated();
+        if($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+            
+            $request->file('image')->storeAs('userImages', $imageName);
+            
+            $user = array_merge($user, ['image' => $imageName]);
+        }
+        $this->userRepository->store($user);
         return redirect()->route('users.index');
     }
 

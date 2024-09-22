@@ -26,7 +26,8 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,' . $id,
-            'role_id' => 'required|integer|exists:roles,id'
+            'role_id' => 'required|integer|exists:roles,id',
+            'status' => 'required|boolean'
         ];
     }
 }

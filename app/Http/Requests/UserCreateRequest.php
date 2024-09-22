@@ -25,7 +25,9 @@ class UserCreateRequest extends FormRequest
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'role_id' => 'required|integer|exists:roles,id'
+            'role_id' => 'required|integer|exists:roles,id',
+            'image' => 'required|image|mimes:png,jpg',
+            'status' => 'required|boolean'
         ];
     }
 }

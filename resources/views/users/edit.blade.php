@@ -35,6 +35,13 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group mt-2">
+                        <label for="status">Status:</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="1" {{ $user->status ? 'selected' : '' }}>Active</option>
+                            <option value="0" {{ $user->status ? '' : 'selected' }}>Inactive</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
             </div>
