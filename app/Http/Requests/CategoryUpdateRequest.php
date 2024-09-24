@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CategoryCreateRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,11 @@ class CategoryCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('category');
+
+
         return [
-            'name' => ['required', 'string', 'min:3', 'unique:categories,name'],
+            'name' => ['required', 'string', 'min:3', 'unique:categories,name,' . $id],
             'images.*' => ['nullable', 'image', 'mimes:png,jpg']
         ];
     }
