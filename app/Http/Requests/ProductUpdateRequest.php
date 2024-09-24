@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ProductUpdateRequest extends FormRequest
 {
@@ -21,7 +23,7 @@ class ProductUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('id');
+        $id = $this->route('product');
 
         return [
             'name' => 'required|string|min:2|unique:products,name,' . $id,
@@ -30,5 +32,14 @@ class ProductUpdateRequest extends FormRequest
             'status' => 'required|boolean',
             'category_id' => 'required|exists:categories,id'
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success' => false,
+            'message' => 'Validation Error',
+            'data' => $validator->errors()
+        ], 422));
     }
 }
