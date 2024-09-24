@@ -46,13 +46,13 @@ class CategoryController extends BaseController
 
     public function update(CategoryUpdateRequest $request, $id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->show($id);
 
         if(!$category) {
             return $this->sendError('Category Not Found!', null, 404);
         }
 
-        $category->update($request->all());
+        $category = $this->categoryRepository->update($id, $request->name);
 
         return $this->sendResponse($category, 'Category Updated Successfully!', 200);
     }
@@ -65,7 +65,7 @@ class CategoryController extends BaseController
             return $this->sendError('Category Not Found', null, 404);
         }
 
-        $category->delete();
+        $category = $this->categoryRepository->destroy($category);
 
         return $this->sendResponse($category, 'Category Destroy Successfully!', 200);
     }

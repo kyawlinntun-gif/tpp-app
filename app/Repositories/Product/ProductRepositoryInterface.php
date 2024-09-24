@@ -7,5 +7,5 @@ interface ProductRepositoryInterface {
     public function show($id);
     public function store($product);
     public function update($id, $data);
-    public function destroy($id);
+    public function destroy($product);
 }

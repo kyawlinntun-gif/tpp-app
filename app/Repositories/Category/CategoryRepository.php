@@ -33,11 +33,13 @@ class CategoryRepository implements CategoryRepositoryInterface {
         $category->update([
             'name' => $name
         ]);
+        $category = $this->show($id);
+        return $category;
     }
 
-    public function destroy($id)
+    public function destroy($category)
     {
-        $category = $this->show($id);
         $category->delete();
+        return $category;
     }
 }

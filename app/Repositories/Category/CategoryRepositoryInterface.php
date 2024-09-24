@@ -7,5 +7,5 @@ interface CategoryRepositoryInterface {
     public function show($id);
     public function store($name);
     public function update($id, $name);
-    public function destroy($id);
+    public function destroy($category);
 }
