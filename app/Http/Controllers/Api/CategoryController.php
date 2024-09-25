@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
@@ -24,7 +25,9 @@ class CategoryController extends BaseController
     {
         $data = $this->categoryRepository->index();
 
-        return $this->sendResponse($data, "Category Retrieved Successfully!", 200);
+        $result = CategoryResource::collection($data);
+
+        return $this->sendResponse($result , "Category Retrieved Successfully!", 200);
     }
 
     public function show($id)
@@ -34,12 +37,28 @@ class CategoryController extends BaseController
             return $this->sendError('Category Not Found!', null, 404);
         }
 
-        return $this->sendResponse($data, 'Category Show Successfully!', 200);
+        $result = new CategoryResource($data);
+
+        return $this->sendResponse($result, 'Category Show Successfully!', 200);
     }
 
     public function store(CategoryCreateRequest $request)
     {
         $category = $this->categoryRepository->store($request->name);
+
+        // return $this->sendResponse($request->file('images'), null);
+
+        if($request->hasFile('images')) {
+            foreach($request->file('images') as $image) {
+                $imageName = time() . '_' . uniqid() . '.' . $image->extension();
+
+                $image->storeAs('categoryImages', $imageName);
+
+                $category->categoryAttachments()->create([
+                    'image' => $imageName
+                ]);
+            }
+        }
 
         return $this->sendResponse($category, 'Category Created Successfully!', 201);
     }

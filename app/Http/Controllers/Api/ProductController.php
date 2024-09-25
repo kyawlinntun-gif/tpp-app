@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Resources\ProductResource;
 use App\Repositories\Product\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,9 @@ class ProductController extends BaseController
     {
         $data = $this->productRepository->index();
 
-        return $this->sendResponse($data, 'Product Retrieved Successfully!', 200);
+        $result = ProductResource::collection($data);
+
+        return $this->sendResponse($result, 'Product Retrieved Successfully!', 200);
     }
 
     public function show($id)
@@ -32,14 +35,26 @@ class ProductController extends BaseController
             return $this->sendError('Product Not Found!', null, 404);
         }
 
-        return $this->sendResponse($data, 'Product Show Successfully!', 200);
+        $result = new ProductResource($data);
+
+        return $this->sendResponse($result, 'Product Show Successfully!', 200);
     }
 
     public function store(ProductCreateRequest $request)
     {
-        $product = $this->productRepository->store($request->all());
+        // $productValidate = $request->validated();
 
-        return $this->sendResponse($product, 'Product Created Successfully!', 201);
+        // if($request->hasFile('image')) {
+        //     $imageName = time() . '.' . $request->file('image')->extension();
+
+        //     $request->image->storeAs('productImages', $imageName);
+
+        //     $productValidate = array_merge($productValidate, ['image' => $imageName]);
+        // }
+
+        // $product = $this->productRepository->store($productValidate);
+
+        // return $this->sendResponse($product, 'Product Created Successfully!', 201);
     }
 
     public function update(ProductUpdateRequest $request, $id)
