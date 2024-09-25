@@ -42,19 +42,19 @@ class ProductController extends BaseController
 
     public function store(ProductCreateRequest $request)
     {
-        // $productValidate = $request->validated();
+        $productValidate = $request->validated();
 
-        // if($request->hasFile('image')) {
-        //     $imageName = time() . '.' . $request->file('image')->extension();
+        if($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->file('image')->extension();
 
-        //     $request->image->storeAs('productImages', $imageName);
+            $request->image->storeAs('productImages', $imageName);
 
-        //     $productValidate = array_merge($productValidate, ['image' => $imageName]);
-        // }
+            $productValidate = array_merge($productValidate, ['image' => $imageName]);
+        }
 
-        // $product = $this->productRepository->store($productValidate);
+        $product = $this->productRepository->store($productValidate);
 
-        // return $this->sendResponse($product, 'Product Created Successfully!', 201);
+        return $this->sendResponse($product, 'Product Created Successfully!', 201);
     }
 
     public function update(ProductUpdateRequest $request, $id)

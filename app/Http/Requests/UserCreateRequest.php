@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserCreateRequest extends FormRequest
 {
@@ -29,5 +31,14 @@ class UserCreateRequest extends FormRequest
             'image' => 'required|image|mimes:png,jpg',
             'status' => 'required|boolean'
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success' => false,
+            'message' => 'Validation Error',
+            'data' => $validator->errors()
+        ], 422));
     }
 }

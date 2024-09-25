@@ -18,11 +18,12 @@ class UserRepository implements UserRepositoryInterface {
         $role = Role::findOrFail($user['role_id']);
         $user = User::create($user);
         $user->assignRole($role->name);
+        return $user;
     }
 
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         return $user;
     }
 
@@ -32,11 +33,14 @@ class UserRepository implements UserRepositoryInterface {
         $role = Role::findOrFail($data['role_id']);
         $user->update($data);
         $user->syncRoles($role);
+        $user = $this->show($id);
+        return $user;
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
+        return $user;
     }
 }
