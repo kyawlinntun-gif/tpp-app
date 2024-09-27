@@ -16,6 +16,12 @@ class ProductController extends BaseController
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
+
+        $this->middleware('permission:productList', ['only' => ['index']]);
+        $this->middleware('permission:productCreate', ['only' => ['store']]);
+        $this->middleware('permission:productEdit', ['only' => ['show']]);
+        $this->middleware('permission:productUpdate', ['only', ['update']]);
+        $this->middleware('permission:productDelete', ['only', ['destroy']]);
     }
 
     public function index()

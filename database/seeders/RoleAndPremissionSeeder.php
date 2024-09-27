@@ -18,19 +18,23 @@ class RoleAndPremissionSeeder extends Seeder
         $user = Role::create(['name' => 'user']);
 
         $dashboard = Permission::create(['name' => 'dashboard']);
+        
         $productList = Permission::create(['name' => 'productList']);
         $productCreate = Permission::create(['name' => 'productCreate']);
         $productEdit = Permission::create(['name' => 'productEdit']);
+        $productUpdate = Permission::create(['name' => 'productUpdate']);
         $productDelete = Permission::create(['name' => 'productDelete']);
 
         $categoryList = Permission::create(['name' => 'categoryList']);
         $categoryCreate = Permission::create(['name' => 'categoryCreate']);
         $categoryEdit = Permission::create(['name' => 'categoryEdit']);
+        $categoryUpdate = Permission::create(['name' => 'categoryUpdate']);
         $categoryDelete = Permission::create(['name' => 'categoryDelete']);
 
         $userList = Permission::create(['name' => 'userList']);
         $userCreate = Permission::create(['name' => 'userCreate']);
         $userEdit = Permission::create(['name' => 'userEdit']);
+        $userUpdate = Permission::create(['name' => 'userUpdate']);
         $userDelete = Permission::create(['name' => 'userDelete']);
 
         $roleList = Permission::create(['name' => 'roleList']);
@@ -48,14 +52,17 @@ class RoleAndPremissionSeeder extends Seeder
             $productList,
             $productCreate,
             $productEdit,
+            $productUpdate,
             $productDelete,
             $categoryList,
             $categoryCreate,
             $categoryEdit,
+            $categoryUpdate,
             $categoryDelete,
             $userList,
             $userCreate,
             $userEdit,
+            $userUpdate,
             $userDelete,
             $roleList,
             $roleCreate,

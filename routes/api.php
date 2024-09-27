@@ -26,8 +26,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('/users', [AuthController::class, 'register']);
+    Route::apiResource('/categories', CategoryController::class);
+    Route::apiResource('/products', ProductController::class);
+    Route::apiResource('/users', UserController::class);
 });
-
-Route::apiResource('/categories', CategoryController::class);
-Route::apiResource('/products', ProductController::class);
-Route::apiResource('/users', UserController::class);

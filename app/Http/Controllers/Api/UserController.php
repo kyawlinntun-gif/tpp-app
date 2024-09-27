@@ -15,6 +15,12 @@ class UserController extends BaseController {
 	public function __construct(UserRepositoryInterface $userRepository)
 	{
 		$this->userRepository = $userRepository;
+
+		$this->middleware('permission:userList', ['only' => ['index']]);
+		$this->middleware('permission:userCreate', ['only' => ['store']]);
+		$this->middleware('permission:userEdit', ['only' => ['show']]);
+		$this->middleware('permission:userUpdate', ['only' => ['update']]);
+		$this->middleware('permission:userDelete', ['only' => ['destroy']]);
 	}
 
 	public function index()
